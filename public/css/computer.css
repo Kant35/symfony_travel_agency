@@ -1,0 +1,201 @@
+@media screen and (min-width: 1024px){
+
+    .marge-menu{
+        padding-top: 100px;
+    }
+
+    /*
+    *
+    * Menu
+    *
+    */
+
+    #menu{
+        z-index: 1000;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: auto;
+        /* position: absolute; */
+        right: 0%;
+    }
+
+    .menu {
+        height: 70px;
+    }
+
+    #menu li a{
+        font-size: 19px;
+    }
+
+    #menu .container-menu > ul{
+        height: 100%;
+        margin: 0;
+    }
+
+    #menu .logo img{
+        width: 130px;
+    }
+
+    .menu-right{
+        position: absolute;
+    }
+
+
+    #menu-admin{
+        height: calc(100vh - 70px);
+        position: sticky;
+        top:70px;
+        padding-top: 100px;
+        padding-bottom: 70px;
+    }
+    /*
+    *
+    *
+    * HOMEPAGE
+    *
+    *
+    */
+    
+    .slogan{
+        font-size: 19px;
+    }
+
+    #welcome-section{
+        height: calc(100vh - 70px);
+    }
+    /*
+    *
+    * Destinations
+    *
+    */
+    
+    #activite-section input:checked ~ .content1{
+        display: flex;
+        position: absolute;
+        left: 50%;
+        margin-top: -30px;
+    }
+
+    #activite-section input:checked ~ .content2{
+        display: flex;
+        position: absolute;
+        left: 50%;
+        margin-top: -75px;
+    }
+
+    #activite-section input:checked ~ .content3{
+        display: flex;
+        position: absolute;
+        left: 50%;
+        margin-top: -120px;
+    }
+
+    #activite-section input:checked ~ .content4{
+        display: flex;
+        position: absolute;
+        left: 50%;
+        margin-top: -165px;
+    }
+
+    #activite-section input:checked ~ .content5{
+        display: flex;
+        position: absolute;
+        left: 50%;
+        margin-top: -210px;
+    }
+    #activite-section input:checked ~ .content6{
+        display: flex;
+        position: absolute;
+        left: 50%;
+        margin-top: -255px;
+    }
+
+
+    .header_carte_produit{
+        display: block;
+    }
+
+
+    .header-compte{
+        height: 30vh;
+        background: url('../images/mon-compte4.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+    
+    /* .header-compte h1{
+        display: block;
+        position: relative;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #092B5E;
+    } */
+
+    /*
+    *
+    *
+    * DEVIS 
+    *
+    *
+    */
+    #container-form{
+        position: relative;
+        left: 0;
+    }
+    .panel-devis{
+        width: 100%;
+    }
+
+    /*
+    *
+    *
+    * MON COMPTE
+    *
+    */
+    .titre-reservation i{
+        right: 30px;
+    }
+    .header-compte h1{
+        color:#FFF;
+    }
+
+   /*
+    *
+    *
+    * DEVIS
+    *
+    */
+    .card-body > div {
+        /* display: flex; */
+    }
+    .card-body .form-group > div {
+        display: flex;
+    }
+
+
+    /*
+    *
+    * FOOTER
+    *
+    */
+    .social-links img{
+        width: 50px;
+    }
+    
+    .contact a{
+        color: #E8ECEB;
+        text-decoration: none;
+    }
+    
+    .contact i{
+        font-size: 20px;
+        color: #E8ECEB;
+    }
+    
+    
+    .logo-footer p{
+        line-height: 13px;
+    }
+}

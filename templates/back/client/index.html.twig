@@ -1,0 +1,48 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Index Client</h1>
+
+    <table class="mt-2 mx-auto col-10 text-center">
+        <thead class="bg-grey">
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                {# <th>Roles</th> #}
+                {# <th>Password</th> #}
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Telephone</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>CP</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>{{ client.ville }}</td>
+                <td>{{ client.codePostal }}</td>
+                <td>
+                    <a href="{{ path('app_back_show_client', {'id': client.id}) }}" class="btn btn-action">voir</a>
+                    {# <a href="{{ path('app_conseiller_edit', {'id': client.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">Aucun client trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

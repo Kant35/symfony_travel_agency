@@ -1,0 +1,192 @@
+body{
+    background-color: #FFF;
+}
+
+.bg-grey{
+    background-color: #E8ECEB;
+}
+
+.page-link{
+    color: #8CBDB9;
+}
+.page-link:hover{
+    color: #8CBDB9;
+}
+.page-link[rel]{
+    color: #2D3E4E  ;
+}
+/* 
+* 
+* Réinitialisation Bootstrap class 
+*
+*/
+.text-primary {
+    color:#8CBDB9 !important
+}
+
+.text-secondary{
+    color:#FFA101 !important
+}
+.text-info{
+    color:#2D3E4E !important
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.bg-primary{
+    background-color: #8CBDB9 !important
+}
+.rounded-30{
+    border-radius: 30px;
+}
+.rounded-15{
+    border-radius: 15px;
+}
+
+.text-no-underline{
+    text-decoration: none;
+}
+
+
+.btn-primary{
+    background-color: #FFA101 !important;
+    border-color: #FFA101 !important;
+    border-radius: 30px;
+    min-width: 70px !important;
+}
+
+.btn-danger{
+    background-color: #FC4364 !important;
+    border-color: #FC4364 !important;
+    border-radius: 30px;
+    min-width: 70px !important;
+}
+
+/*
+*
+*
+* TABLEAU
+*
+*/
+
+table, th, tr, td{
+    border: 1px solid rgb(185, 185, 185);
+    border-collapse: collapse;
+}
+
+thead{
+    height: 50px;
+}
+tbody tr{
+    height: 45px;
+}
+
+.btn-action{
+    border-radius: 5px;
+    background-color: #2D3E4E;
+    color: #FFF;
+    height: 25px;
+    width: 90%;
+    padding: 0 10px;
+}
+.btn:hover.btn-action{
+    color: #FFA101;
+}
+
+.btn-action-modifier{
+    border-radius: 5px;
+    background-color: #E8ECEB;
+    color: #2D3E4E;
+    height: 25px;
+    width: 90%;
+    padding: 0 10px;
+}
+.btn:hover.btn-action-modifier{
+    color: #FFA101;
+}
+
+
+/*
+*
+*
+* MENU ADMIN
+*
+*/
+#menu-admin{
+    background-color: #E8ECEB;
+}
+#menu-admin li{
+    list-style: none;
+}
+
+#menu-admin .submenu{
+    display: none;
+}
+
+/*
+*
+*
+* DESTINATION ADMIN
+*
+*/
+
+.info-destination{
+    list-style-image: url("../images/icons/icon_puce_liste.png");
+}
+
+.raison-destination .circle{
+    border: #FFA101 dashed 2px;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: flex; 
+    justify-content: center;
+}
+.raison-destination .circle p{
+    transform: translateY(25%);
+    font-size: 1.3rem;
+    color: #FFA101;
+}
+
+.destination-produits .case-img{
+    height: 100px;
+    width: 150px;
+}
+.destination-produits img{
+    height: 100px;
+}
+
+.card-conseiller{
+    width: 170px;
+    overflow: hidden;
+}
+.card-conseiller img{
+    width: 170px;
+
+    display: flex;
+    left: 50%;
+}
+
+/*
+*
+*
+* VICHUPLOADER IMAGE ADMIN
+*
+*/
+
+.vich-image img{
+    width: 100px;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+
+/**
+*
+*
+* 
+*
+*
+*/

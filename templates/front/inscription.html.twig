@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{# récupération du contenu du block 'title' de la page 'parent()' qui est ici 'base.html.twig' #}
+{% block title %}{{ parent() }} | Inscription{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Inscription</h1>
+
+    {# Affichage du formulaire #}
+    <div class="col-5 mx-auto">
+        {{ form_start(formClient) }}
+            {{ form_widget(formClient) }}
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-primary">Inscription</button>
+            </div>
+        {{ form_end(formClient) }}
+    </div>
+
+{% endblock %}

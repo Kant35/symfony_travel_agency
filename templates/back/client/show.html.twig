@@ -1,0 +1,67 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+{% block content %}
+    {# <h1 class="text-center">Index Client</h1>
+
+    <table class="mt-2 mx-auto col-10 text-center">
+        <thead class="bg-grey">
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Telephone</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>CP</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>{{ client.ville }}</td>
+                <td>{{ client.codePostal }}</td>
+                <td>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table> #}
+        <div class="col-8 px-3 px-md-0 mb-5 mx-auto">
+            <div class="bg-white col-md-9 mx-auto pb-3">
+                <div class="titre-coordonees bg-primary">
+                    <h4 class="text-center text-white p-2">Coordonnées</h4>
+                </div>
+                
+                <div class="px-4 py-4">
+                <pre>
+                    {# {{ dump(client) }} #}
+                </pre>
+                    <p>{{client.prenom|capitalize ~ " " ~ client.nom|capitalize}} </p> 
+                    {% if client.adresse != null %}
+                        <p> <i class="fas fa-home"></i> {{client.adresse ~ ", " ~ client.codePostal ~ " " ~ client.ville}} </p>
+                    {% else %}
+                        <p class="ps-3 fs-6"><em> adresse non communiquée</em></p>
+                    {% endif %}
+                    
+                    <p><i class="fas fa-phone"></i> : {{ client.telephone}}</p>
+                    <p><i class="fas fa-at"></i> : {{client.email}}</p>
+
+                </div>
+
+                {# <div class="d-flex justify-content-center">
+                    <a class="btn btn-danger" href="">Supprimer ce profil</a> 
+                </div> #}
+                    {{ include('back/client/_delete_form.html.twig') }}
+
+            </div>
+        </div>
+{% endblock %}

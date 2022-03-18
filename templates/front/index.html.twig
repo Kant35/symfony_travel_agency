@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Accueil{% endblock %}
+
+{% block body %}
+
+
+    <section id="welcome-section">
+
+        {# Affichage des messages d'erreur #}
+        {% for label, messages in app.flashes(['success', 'danger', 'warning']) %}
+            {% for message in messages %}
+                <div class="col-md-5 alert alert-{{ label }} mx-auto text-center" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {# Slogan #}
+        <div class="position-absolute top-50 start-50 translate-middle col-12 mt-5 mt-md-0">
+            <p class="slogan col-md-4 col-10 my-5 p-1 text-center text-white mx-auto rounded-15">Des voyages plus insolites !</p>
+        </div>
+
+        {# Bouton fleches qui amène sur la section "concept" #}
+        <a href="#concept" class="col-12 position-absolute bottom-0 text-center"><i class=" fas fa-chevron-down text-primary h1 "></i></a>
+    </section>
+
+    {# Section concept qui décrit l'entreprise #}
+    <section id="concept">
+        <h2 class="mt-4 mt-md-0 mb-4 text-center text-primary marge-menu">Notre Concept</h2>
+        <p class="col text-justify mx-5 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus earum iusto non perspiciatis harum consectetur molestiae soluta eaque eveniet! Sequi corporis necessitatibus pariatur maxime fuga eos accusantium voluptates fugiat laborum?
+        Rem quia magni, distinctio doloremque id qui tenetur aut suscipit voluptatem minima maiores eos non exercitationem in. Quod odit accusamus quibusdam ab quidem, eius voluptatum, ut possimus quo dignissimos ipsa!
+        Molestiae cupiditate nostrum vel aperiam officiis! Dolore provident, dicta animi suscipit non neque eos. Aliquid ipsum deleniti, minima quo iure accusamus ex quam dolorum, eaque, beatae hic nobis debitis officia.
+        Commodi nisi quasi accusamus dolorum est unde labore harum placeat earum et! Atque velit dolore aliquam, sunt ipsum consequatur iusto praesentium fugit id aut sint saepe ducimus possimus quod nostrum?
+        Possimus veniam unde aspernatur quis. Animi amet fugiat architecto itaque. Veritatis et adipisci alias quam fuga consectetur similique facilis, iusto, iste labore, mollitia veniam quod eveniet corporis voluptatibus quas inventore!
+        Pariatur, consectetur provident. Rerum, fugiat explicabo ea dignissimos illum minima fugit assumenda a, placeat eum voluptatum dicta saepe, reiciendis obcaecati. Reiciendis obcaecati veniam porro laudantium eos soluta doloribus magnam? Ea?</p>
+    </section>
+
+    {# Section d'affichage des conseillers référents #}
+    <section id="team-section" class="mb-5">
+        <h2 class="text-center text-primary mt-5 mb-4">Nos Experts à votre service</h2>
+        <div class="container d-flex flex-wrap justify-content-around">
+            {# On boucle sur le tableau des conseillers que l'on a récupéré et envoyé à la vue depuis le controller #}
+            {% for conseillerReferent in conseillersReferent  %}
+                <div class="card col-4 rounded-30 my-3">
+                    <div class="card-img col-12 rounded-circle mx-auto my-3">
+                        <a href="">
+                            <img src="{{ vich_uploader_asset(conseillerReferent) }}" alt="">
+                        </a>
+                    </div>
+                    <div class="mx-2">
+                        {# Ici on affiche le nom et le prénom grâce à une concaténation. On aurais également pu le faire en appellant 'conseillerReferent' directement si on avait placé la méthode magique __toString() dans notre entité 'Conseiller.php' #}
+                        <h4 class="text-center">{{conseillerReferent.nom ~ " " ~ conseillerReferent.prenom}}</h4>
+                            <h5 class="text-center">{{conseillerReferent.specialite.titre}}</h5>
+                        <p class="text-justify">{{conseillerReferent.description}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+{% endblock %}

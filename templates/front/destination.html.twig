@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Destination {% endblock %}
+
+{% block body %}
+
+    {# Header de la destination avec Titre et Description #}
+    <section id="header-destination" class="mt-3">
+        <h1 class="text-primary text-center mb-3">Découvrez {{ destination.titre == 'USA' ? 'les' : 'le' }} {{destination.titre}}</h1>
+        <p class="text-justify mx-5 lg-px-5">{{destination.Description}}</p>
+    </section>
+
+    {# Affichage du Conseiller Référent #}
+    {# Ici je ne souhaite afficher qu'un seul conseiller. Je vais donc préparer une variable qui me permettra d'arréter la boucle. #}
+    {# Je prépare un variable 'break' qui est par défaut à 'false' #}
+    {% set break = false %}
+    {# Je fais ma boucle sur mes conseillers que je récupère grâce à ma destination. J'ai une variable dans destination qui me permet de récupérer toutes les destinations #}
+    {% for conseiller in destination.conseillers %}
+        {# Je fais une condition ou je lui dit que si la propriété 'conseiller.referent' est égal à 'true' alors je rentre dans la condition et j'affiche ses informations
+        J'ai également rajouté dans la condition la vérification de la variable break. Si elle est à false je peux rentrer.
+        #}
+        {% if conseiller.referent and break == false %}
+            <section id="description-section" class="mt-5">
+                <div class="vendeur-description d-flex flex-wrap">
+                    <div class="col-12 col-md-5 col-xl-3 d-flex justify-content-center">
+                        <div class="container-img rounded-30 d-flex justify-content-center">
+                            <img src="{{ vich_uploader_asset(conseiller) }}" alt="">
+                        </div>
+                    </div>
+                    <div class="content col-12 col-md-7 col-xl-8 px-3 mt-5 mt-xl-0">
+                        <h4 class="text-center text-primary">Les conseils de notre expert <strong>{{ conseiller.prenom }}</strong> !</h4>
+                        <p class="text-justify">{{ conseiller.description }}</p>
+                    </div>
+                </div>
+            </section>
+            {# Je suis rentré dans ma condition et j'ai affiché les informations de mon conseiller. Comme mentionné précédement je ne souhaite affiché qu'un seul conseiller. 
+            Maintenant que je l'ai affiché je ne souhaite plus faire d'affichage. Pour cela je vais passer ma variable 'break' à true.
+            Ce qui va se passer c'est que la boucle va refaire un tour mais ne rentrera plus jamais dans la condition 'if' car je lui ai dit qu'elle ne rentrai dedans QUE si 'break' était égal à 'false' ce qui n'est plus le cas maintenant.
+
+            Je suis donc sur de n'avoir qu'un seul affichage de conseiller !
+             #}
+            {% set break = true %}
+        {% endif %}
+    {% endfor %}
+
+    <section id="produits-section" class="my-5">
+        <h4 class="text-center text-primary">Nos Itinéraires</h4>
+        <div class="container d-flex flex-wrap justify-content-around">
+            {# Ici j'affiche tous les produits lié à ma destination. Je fais donc une boucle sur la propriété 'destination.produits' qui contient tous les produits de cette destination. #}
+            {% for produit in destination.produits %}
+                <div class="card col-4 rounded-30 my-3">
+                    <img class="col-12 rounded-30"src="{{ vich_uploader_asset(produit)}}" alt="{{ produit.titre }}">
+                    <h2 class="text-center "><a class="text-info text-no-underline h5" href="{{ path('app_produit', {id:produit.id}) }}">{{ produit.titre }}</a></h2>
+                    {# Pour calculer le nombre de jour et de nuit j'utilise le filtre twig 'length'. Je récupère le nombre d'étape qui correspond au nombre de jour. Ensuite je récupère le nombre d'étape -1 qui correspond au nombre de nuit #}
+                    <p class="duree text-center text-secondary">{{produit.etapes|length}} Jours / {{ produit.etapes|length - 1 }} Nuits</p>
+                    {# Ici j'utilise le filtre twig 'truncate' qui me permet de réduire l'affichage du nombre de caractères. Ici je demande de n'afficher que 150 caractères. Après avoir afficher les 150 caractères tu m'affiches '...'. Enfin la valeur 'false' indique que l'on ne souhaite pas couper le dernier mot. Par défaut elle est à 'true' et coupe du coup le dernier mot #}
+                    <p class="description px-3 text-justify">{{ produit.description|u.truncate(150, '...', false) }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

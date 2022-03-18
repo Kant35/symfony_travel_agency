@@ -1,0 +1,10 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}New Destination{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Nouvelle destination</h1>
+
+    {{ include('back/destination/_form.html.twig') }}
+
+{% endblock %}

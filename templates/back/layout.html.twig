@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset("css/admin.css")}}">
+{% endblock %}
+
+
+{% block body %}
+<div class="d-flex">
+    <nav id="menu-admin" class="col-2 ">
+        <ul>
+            <li class="py-2">
+                <a class="text-no-underline h6 text-info" href="{{path('app_back')}}">Accueil Admin</a>
+            </li>
+            <li class="py-2">
+                <a class="text-no-underline h6 text-info" href="{{path('app_reservation_index')}}">Toutes les Réservations</a>
+            </li>
+            <div class="dropdown">
+                <a href="{{ path('app_destination_index') }}"class="h6 pt-2 dropdown-toggle text-no-underline text-info" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Destination
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="py-2"><a class="text-no-underline h6 ps-2 text-info" href="{{ path('app_destination_index') }}">Liste Destinations</a></li>
+                    {% for destination in destination_repository.findAll %}
+                        <li class="py-2"><a class="text-no-underline h6 ps-2 text-info" href="{{ path('app_destination_show', {id:destination.id}) }}">{{destination.titre}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <li class="py-2">
+                <a class="text-no-underline h6 text-info" href="{{ path('app_produit_index') }}">Produits</a>
+            </li>
+            <li class="py-2">
+                <a class="text-no-underline h6 text-info" href="{{ path('app_back_client') }}">Clients</a>
+            </li>
+            <li class="py-2">
+                <a class="text-no-underline h6 text-info" href="{{ path('app_conseiller_index') }}">Conseillers</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content-body" class="col-10 mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

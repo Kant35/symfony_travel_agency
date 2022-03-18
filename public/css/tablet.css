@@ -1,0 +1,34 @@
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .header_carte_produit{
+        display: block;
+    }
+
+    .card-activite img{
+        height: 230px;
+    }
+
+    /*
+    *
+    * FOOTER
+    *
+    */
+    .social-links img{
+        width: 50px;
+    }
+    
+    .contact a{
+        color: #E8ECEB;
+        text-decoration: none;
+    }
+    
+    .contact i{
+        font-size: 20px;
+        color: #E8ECEB;
+    }
+    
+    
+    .logo-footer p{
+        line-height: 13px;
+    }
+}

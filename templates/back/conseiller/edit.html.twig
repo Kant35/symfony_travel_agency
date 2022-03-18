@@ -1,0 +1,12 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Edit Conseiller{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Edit Conseiller</h1>
+
+    {{ include('back/conseiller/_form.html.twig', {'button_label': 'Modifier', 'button_type': 'warning'}) }}
+
+
+    {{ include('back/conseiller/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Profil {% endblock %}
+
+{% block body %}
+
+    {# Affichage des messages Flash #}
+    {% for label, messages in app.flashes(['success', 'danger', 'warning']) %}
+        {% for message in messages %}
+            <div class="col-md-6 mx-auto alert alert-{{ label }} text-center" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+<section class="d-flex flex-md-nowrap flex-wrap-reverse mx-auto mt-5">
+
+    {# Affichages des données de l'utilisateur #}
+    <div class="col-12 px-3 px-md-0 col-md-6 my-5">
+        <div class="bg-white col-md-9 mx-auto pb-3">
+            <div class="titre-coordonees bg-primary">
+                <h4 class="text-center text-white p-2">Mes coordonnées</h4>
+            </div>
+            
+            <div class="px-4 py-4">
+                <p>{{utilisateur.prenom|capitalize ~ " " ~ utilisateur.nom|capitalize}} </p> 
+                {% if utilisateur.adresse is defined %}
+                    <p>{{utilisateur.adresse ~ ", " ~ utilisateur.codePostal ~ " " ~ utilisateur.ville}} </p>
+                {% else %}
+                    <p class="fs-6"> adresse non communiquée</p>
+                {% endif %}
+
+                {% set telephone = "téléphone non communiqué" %}
+                {% if utilisateur.telephone is defined %}
+                    {% set telephone = utilisateur.telephone %}
+                {% endif %}
+                
+                <p>{{telephone}}</p>
+
+            </div>
+
+            <div class="px-4 py-4">
+                <p>Email / Identifiant : {{utilisateur.email}}</p>
+                <p>Mots de Passe : ********* </p>
+
+            </div>
+
+            {# Bouton d'action pour modifier le profil et le mot de passe #}
+            <div class="d-flex flex-md-nowrap flex-wrap">
+                <a class="btn btn-primary col-md-4 mx-auto mb-2 mb-md-0" href="">Modifier mes infos</a> 
+                <a class="btn btn-primary col-md-6 mx-auto" href="{{ path('app_update_pwd') }}">Modifier mon Mot de Passe</a>
+            </div>
+        </div>
+    </div>
+
+    {# Gestion de l'affichage des réservations #}
+    <div class="col-12 px-3 px-md-0 col-md-6 mb-5">
+        <div class="bg-white col-md-9 mx-auto mb-5">
+
+            {# J'ai utilisé ici un bloc pour éviter de le répéter plusieurs fois sur la page. 
+            Cela permet d'être plus claire en terme d'affichage. 
+            J'ai donc utiliser un include et j'ai passé à cet include des paramètres.
+            Je lui ai passé dans un premier temps les réservations en fonction de leur statut et dans un deuxième temps un titre qui me permettra de dynamiser l'affichage dans mon bloc. 
+            Aller voir le template 'front/_bloc_reservations.html.twig'.
+            #}
+            <div>
+                {{ include('front/_bloc_reservations.html.twig', {'reservations':reservationValide, 'titre':'Voyage(s) à Venir'}) }}
+            </div>
+
+            <div>
+                {{ include('front/_bloc_reservations.html.twig', {'reservations':reservationAttente, 'titre':'En Cours de Traitement'}) }}
+            </div>
+
+            <div>
+                {{ include('front/_bloc_reservations.html.twig', {'reservations':reservationTermine, 'titre':'Ancienne(s) Réservation'}) }}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

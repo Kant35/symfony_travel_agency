@@ -1,0 +1,109 @@
+{# <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        </div>
+    </div>
+</nav> #}
+
+<div class="bouton_hamburger position-absolute d-lg-none">
+    <input type="checkbox" id="icon_hamburger_menu" name="icon_hamburger_menu" hidden>
+    <label class="bouton_menu" for="icon_hamburger_menu">
+        <div class="hamburger_div">
+            <span></span>
+        </div>
+    </label>
+</div>
+<nav id="menu" class="top-0 d-none d-lg-block">
+    <div class="menu d-none d-md-flex bg-secondary position-relative">
+    
+        <div class="logo d-md-block pt-4 pt-md-0">
+            <a href="{{ path("app_front")}}"><img src="{{asset('images/logo/Logo_Escapade_Tour.png')}}" alt="Logo Escapade Tour"></a>
+        </div>
+
+        <div class="container-menu d-md-flex">
+            <ul class="d-md-flex p-0 ps-md-4">
+                <li class="nav-item dropdown list-group my-auto">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Destination
+                    </a>
+                    <ul class="dropdown-menu ms-3" aria-labelledby="navbarDropdown">
+                        {% for destination in destinations %}
+                            <li><a class="dropdown-item" href="{{ path('app_destination', {id:destination.id}) }}">{{destination.titre}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item active list-group my-auto">
+                    <a class="nav-link text-white" href="{{ path('app_contact') }}">Contact</a>
+                </li>
+                {# <li class="nav-item list-group my-auto">
+                    <a class="nav-link text-white" href="">Mon Devis sur Mesure</a>
+                </li> #}
+
+                {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_CONSEILLER") %}
+                    <li class="nav-item active list-group my-auto">
+                        <a class="nav-link text-primary" href="{{ path('app_back') }}">Espace Admin</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="menu-right d-md-flex end-0 p-0 ps-md-4">
+                {% if app.user %}
+                    <li class="nav-item active list-group my-auto">
+                        <a class="nav-link text-secondary " href="{{ path('app_profil') }}"><i class="fas fa-user iconeCompte"></i><small>({{app.user.prenom|capitalize ~ " " ~ app.user.nom|capitalize}})</small></a>
+                    </li>
+                    <li class="nav-item active list-group my-auto">
+                        <a class="nav-link text-white" href="{{ path('app_logout') }}">Deconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active list-group my-auto">
+                        <a class="nav-link text-secondary" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item active list-group my-auto">
+                        <a class="nav-link text-white" href="{{ path('app_inscription') }}">Inscription</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <div id="contact" class="d-md-none d-flex flex-column justify-content-center">
+                <a href="" class="phone btn btn-primary mb-0 mx-auto">01-02-03-04-05</a>
+                <br>
+                <a href="" class="text-secondary text-center mt-0 text-decoration-none">escapade-tour@gmail.com</a>
+            </div>
+
+            <div id="social-links" class="d-md-none col-7 mx-auto mt-2">
+                <div class="d-flex justify-content-between">
+                    <a href=""><img src="{{asset('images/socialMedias/icon_facebook.png')}}" alt="Icone lien Facebook"></a>
+                    <a href=""><img src="{{asset('images/socialMedias/icon_instagram.png')}}" alt="Icone lien Instagram"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

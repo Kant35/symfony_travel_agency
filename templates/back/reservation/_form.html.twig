@@ -1,0 +1,26 @@
+<div class="col-11 mx-auto">
+    {{form_start(form)}}
+        <div class="col-4 mx-auto mt-5">
+            {{form_row(form.statut, {'row_attr':{'class':'text-center'}})}}
+            {{form_row(form.date_depart, {'label':'Changez la date de départ'})}}
+        </div>
+
+        <h5 class="text-center mt-4">Ajoutez des participants à la réservation</h5>
+        <div class="container-participants mt-4 d-flex justify-content-center flex-wrap" data-prototype="{{ form_widget(form.participants.vars.prototype)|e('html_attr')}}">
+            {% for row in form.participants %}
+                <div class="card-participant col-3 mx-auto mt-1">
+                    <div class="card-header text-center">Participant {{ loop.index}}</div>
+                    <div class="card-body">
+                        {{ form_row(row) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h3 class="text-center">Prix Total : <strong class="totalPrice fs-3">{{ reservation.prixTotal }}</strong>€</h3>
+
+        <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-success">Enregistrer les modifications</button>
+        </div>
+    {{form_end(form)}}
+</div>

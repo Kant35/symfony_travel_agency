@@ -1,0 +1,44 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Produits</h1>
+
+    <a class="position-relative btn btn-success ms-5"href="{{ path('app_produit_new') }}">Create new</a>
+
+    <table class="mt-2 mx-auto col-11 text-center">
+        <thead class="bg-grey">
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th style="width:100px">Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.titre }}</td>
+                <td>{{ produit.description|u.truncate(200, '...', false) }}</td>
+                <td>
+                    <img src="{{ vich_uploader_asset(produit) }}" alt="" style="width:100px">
+                </td>
+                <td>{{ produit.prix }}€ / personne</td>
+                <td>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-action">voir</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-action-modifier">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

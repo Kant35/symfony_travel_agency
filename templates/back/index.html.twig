@@ -1,0 +1,49 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}{{ parent() }} | Admin{% endblock %}
+
+{% block content %}
+
+    <h4 class="text-center text-primary mt-5">Nouvelles réservations</h4>
+    <table class="mt-2 mx-auto col-10 text-center">
+        <thead class="bg-grey">
+            <tr>
+                <th class="col-2">Reference</th>
+                <th class="col-3">Produit</th>
+                <th class="col-2">Nom Client</th>
+                <th class="col-2">Statut</th>
+                <th class="col-1">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if nouvelleReservations is empty %}
+                <tr>
+                    <td colspan="6">Aucune nouvelle réservation</td>
+                </tr>
+            {% else %}
+                {% for reservation in nouvelleReservations %}
+                    <tr>
+                        <td>{{reservation.reference}}</td>
+                        <td>{{reservation.produit.titre}}</td>
+                        <td>{{reservation.client.prenom|capitalize ~ " " ~ reservation.client.nom|capitalize}}</td>
+                        <td>{{reservation.statut}}</td>
+                        <td>
+                            <a href="{{ path('app_reservation_show', {id:reservation.id}) }}" class="btn btn-action">voir</a>
+                        </td>
+                        {# <td>
+                            <select class="select-conseiller" name="conseiller" id="conseiller">
+                                <option value="default">A définir</option>
+                                {% for conseiller in conseillers %}
+                                    <option value="{{conseiller.id}}" {{(reservation.conseiller is not null and conseiller.id == reservation.conseiller.id) ? "selected"}}>{{conseiller.user.nom ~ " " ~ conseiller.user.prenom}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="hidden" value="{{reservation.id}}" class="reservationId">
+                        </td> #}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    
+    </table>
+
+{% endblock %}

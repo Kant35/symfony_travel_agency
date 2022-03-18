@@ -1,0 +1,91 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block content %}
+    
+    <div class="position-relative me-5">
+        <a href="{{path('app_reservation_edit', {"id": reservation.id})}}" class="btn btn-primary position-absolute end-0">Modifier</a>
+    </div>
+
+    <div class="d-flex mt-5">
+        <div class="col-md-6">
+            <div class="col-md-7 p-3 mx-auto border">
+                <div class="d-flex">
+                    <p class="col-md-4"><em>Référence</em> - </p>
+                    <p class="col-md-8">{{reservation.reference}}</p>
+                </div>
+                <div class="d-flex">
+                    <p class="col-md-4"><em>Produit</em> - </p>
+                    <p class="col-md-8">{{reservation.produit.titre}}</p>
+                </div>
+                <div class="d-flex">
+                    <p class="col-md-4"><em>Destination</em> - </p>
+                    <p class="col-md-8">
+                        {% for destination in reservation.produit.destinations %}
+                            {% if loop.last %}
+                                {{destination.titre}}
+                            {% else %}
+                                {{destination.titre}},
+                            {% endif %}
+                        {% endfor %}</p>
+                </div>
+                <div class="d-flex">
+                    <p class="col-md-4"><em>Départ</em> - </p>
+                    <p class="col-md-8">{{reservation.dateDepart ? reservation.dateDepart|date('d M Y') : '' }}</p>
+                </div>
+                <div class="d-flex">
+                    <p class="col-md-4"><em>Participants</em> - </p>
+                    <p class="col-md-8">{{reservation.participants|length}}</p>
+                </div>
+                <div class="d-flex">
+                    <p class="col-md-4"><em>Statut</em> - </p>
+                    <p class="col-md-8">{{reservation.statut}}</p>
+                </div>
+
+                {# <select class="form-select select-status col-md-6" name="conseiller" id="conseiller">
+                    <option value="Attente de Gestion" {{("En Attente" == reservation.statut) ? "selected"}}>Attente de Gestion</option>
+                    <option value="En cours de Traitement" {{("En cours de Traitement" == reservation.statut) ? "selected"}}>En cours de Traitement</option>
+                    <option value="A solder" {{("A solder" == reservation.statut) ? "selected"}}>A solder</option>
+                    <option value="A venir" {{("A venir" == reservation.statut) ? "selected"}}>A venir</option>
+                    <option value="En cours de voyage" {{("En cours de voyage" == reservation.statut) ? "selected"}}>En cours de voyage</option>
+                    <option value="Revenu" {{("Revenu" == reservation.statut) ? "selected"}}>Revenu</option>
+                    <option value="Terminée" {{("Terminée" == reservation.statut) ? "selected"}}>Terminée</option>
+                    <option value="Supprimée" {{("Supprimée" == reservation.statut) ? "selected"}}>Supprimée</option>
+                </select> #}
+                {# <input type="hidden" value="{{reservation.id}}"> #}
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="bg-white col-md-7 p-3 mx-auto border">
+                    <p class="col-md-12 text-center">{{reservation.client.prenom|capitalize ~ " " ~ reservation.client.nom|capitalize}}</p>
+                
+                    <p class="col-md-12">
+                        <i class="fa-solid fa-house-user"></i> : {{reservation.client.adresse}} 
+                        <br> 
+                        {{reservation.client.codePostal ~ ", " ~ reservation.client.ville}}
+                    </p>
+
+                    <p class="col-md-12"> <i class="fa-solid fa-at"></i> : {{reservation.client.email}}</p>
+                
+                    <p class="col-md-12"> <i class="fa-solid fa-phone"></i> : {{reservation.client.telephone }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="bg-white mt-5 col-md-10 p-3 mx-auto border">
+        <h4 class="text-center mb-3">Participant(s)</h4>
+
+        {% for participant in reservation.participants %}
+            <div class="bg-secondary col-md-11 mx-auto d-flex justify-content-center align-items-center text-white rounded-15 mb-1">
+                <p class="col-2 my-auto ps-4"><em>Participant n°{{loop.index}}</em></p>
+                <p class="col-3 my-auto ps-4">{{participant.prenom ~ " " ~ participant.nom}}</p>
+                <p class="col-3 my-auto ps-4">{{participant.dateNaissance|date('d M Y')}} </p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

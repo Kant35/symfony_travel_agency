@@ -1,0 +1,53 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Conseiller index{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Index Conseiller</h1>
+
+    <a class="position-relative btn btn-success ms-5"href="{{ path('app_conseiller_new') }}">Create new</a>
+
+
+    <table class="mt-2 mx-auto col-10 text-center">
+        <thead class="bg-grey">
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                {# <th>Roles</th> #}
+                {# <th>Password</th> #}
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Photo</th>
+                <th>Referent</th>
+                <th>Description</th>
+                {# <th>Maj</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conseiller in conseillers %}
+            <tr>
+                <td>{{ conseiller.id }}</td>
+                <td>{{ conseiller.email }}</td>
+                {# <td>{{ conseiller.roles ? conseiller.roles|json_encode : '' }}</td> #}
+                {# <td>{{ conseiller.password }}</td> #}
+                <td>{{ conseiller.prenom }}</td>
+                <td>{{ conseiller.nom }}</td>
+                <td>{{ conseiller.photo }}</td>
+                <td>{{ conseiller.referent ? 'Yes' : 'No' }}</td>
+                <td>{{ conseiller.description }}</td>
+                {# <td>{{ conseiller.maj ? conseiller.maj|date('Y-m-d H:i:s') : '' }}</td> #}
+                <td>
+                    <a href="{{ path('app_conseiller_show', {'id': conseiller.id}) }}" class="btn btn-action">voir</a>
+                    <a href="{{ path('app_conseiller_edit', {'id': conseiller.id}) }}" class="btn btn-action-modifier">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

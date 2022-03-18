@@ -1,0 +1,43 @@
+{# 
+
+Lors de l'include j'ai passé en paramètre 2 informations
+
+Ces informations sont récupérable ici sous forme de variables.
+J'ai donc accès à la variable 'reservations' et à la variable 'titre'
+
+Je vais utiliser ces 2 variables pour afficher les informations souhaitées
+
+#}
+
+<div class="titre-reservation bg-secondary position-relative  d-flex justify-content-center align-items-center my-1 py-1">
+    <i class="fas fa-chevron-down text-white"></i>
+    {# Affichage du titre passé dans la variabke 'titre' et affichage du nombre de réservations dans le tableau grâce au filtre twig 'length' #}
+    <h5 class="text-center text-white m-0">{{titre}} ({{reservations|length }})</h5>
+</div>
+
+<div class="container-bookings d-none">
+    {# Récupération de chaque réservation dans la variables 'reservations' #}
+    {% for booking in reservations %}
+        <div class="border-bottom d-flex flex-md-nowrap flex-wrap">
+            <div class="col-12 col-md-6">
+                <p class="ps-3"><small>Reference : {{booking.reference}}</small> </p>
+                <p class="ps-3 h5 text-center">{{booking.produit.titre}}</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <p class="lh-1 ps-3 ps-md-0">
+                    <small>
+                        {# Pour afficher la date on n'oublie pas que le filtre twig 'date()' est indispensable #}
+                        Date de départ : {{booking.dateDepart|date("d-M-Y")}}
+                        <br>
+                        Nombre de Participants : {{booking.participants|length}}
+                    </small>
+                </p>
+
+                <p>
+                    Total de la réservation : <span class="text-secondary">{{booking.prixTotal}}€</span>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+

@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Reservation {% endblock %}
+
+{% block body %}
+
+    {# Affichage du message pour l'admin, pour le notifier qu'il ne peut pas faire de réservation #}
+    {% if message %}
+        <div class="alert alert-warning col-5 mx-auto text-center">
+            {{message}}
+        </div>
+    {% endif %}
+
+<h1 class="text-center">Vous avez sélectionnez le produit : </h1>
+<h2 class="text-center text-primary">{{ produit.titre }}</h2>
+
+    <div class="col-11 mx-auto">
+        {{form_start(formReservation)}}
+            <div class="col-4 mx-auto mt-5">
+                {{form_row(formReservation.date_depart)}}
+            </div>
+
+            {# Gestion d'affichage du formulaire pour ajouter un participant #}
+            <h5 class="text-center mt-4">Ajoutez des participants à votre réservation</h5>
+            {# On passe en attribut à notre div le prototype de notre formulaire. 
+            Le prototype est un template en html de notre formulaire. Si vous regarder dans l'inspecteur de votre navigateur vous devriez trouver à l'intèrieur de l'attribut le template du formulaire #}
+            <div class="container-participants mt-4 d-flex justify-content-center flex-wrap" data-prototype="{{ form_widget(formReservation.participants.vars.prototype)|e('html_attr')}}">
+                {# On fait un boucle sur la propriété 'formReservation.participants' pour pouvoir afficher tous les champs du formulaire de participants #}
+                {% for row in formReservation.participants %}
+                    <div class="card-participant">
+                        {{ form_row(row) }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h3 class="text-center">Prix Total : <strong class="totalPrice fs-3">{{ produit.prix }}</strong>€</h3>
+
+            {# On block l'accès au bouton pour l'admin #}
+            {% if admin == false %}
+                <div class="d-flex justify-content-center mt-5">
+                    <button class="btn btn-success">Valider la réservation</button>
+                </div>
+            {% endif %}
+        {{form_end(formReservation)}}
+    </div>
+
+{% endblock %}

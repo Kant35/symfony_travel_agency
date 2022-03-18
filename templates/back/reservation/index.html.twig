@@ -1,0 +1,38 @@
+{% extends 'back/layout.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-primary">Reservations</h1>
+
+    <table class="mt-2 mx-auto col-10 text-center">
+        <thead class="bg-grey">
+            <tr>
+                <th>Reference</th>
+                <th>Date_depart</th>
+                <th>Prix_total</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.reference }}</td>
+                <td>{{ reservation.dateDepart ? reservation.dateDepart|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.prixTotal }}€</td>
+                <td>{{ reservation.statut }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-action">voir</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-action-modifier">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,447 @@
+/* 
+
+#2D3E4E -> Pour l'écriture générale
+#FFA101 -> Pour les Boutons / Liens / 
+#8CBDB9 -> Pour les titres
+#E8ECEB -> Pour le fond d'écran
+
+*/
+
+/* GENERAL */
+body{
+    background-color: #E8ECEB;
+}
+
+*{
+    font-size: 0.95rem;
+    font-family: 'Playfair Display', serif;
+}
+strong{
+    font-size: 1.5rem;
+}
+.card{
+    width: 280px;
+}
+legend{
+    display: none;
+}
+.form-shadow {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(94, 36, 195, 0.1); 
+    box-shadow: 0px 0px 15px 0px rgba(94, 36, 195, 0.1);
+}
+/* 
+* 
+* Réinitialisation Bootstrap class 
+*
+*/
+.text-primary {
+    color:#8CBDB9 !important
+}
+
+.text-secondary{
+    color:#FFA101 !important
+}
+.text-info{
+    color:#2D3E4E !important
+}
+.text-justify{
+    text-align: justify;
+}
+
+.bg-primary{
+    background-color: #8CBDB9 !important
+}
+.bg-secondary{
+    background-color: #2D3E4E !important
+}
+.bg-light{
+    background-color: #E8ECEB !important
+}
+
+.rounded-30{
+    border-radius: 30px;
+}
+.rounded-15{
+    border-radius: 15px;
+}
+
+.text-no-underline{
+    text-decoration: none;
+}
+
+
+.btn-primary{
+    background-color: #FFA101 !important;
+    border-color: #FFA101 !important;
+    border-radius: 30px;
+    min-width: 70px !important;
+}
+
+.btn-danger{
+    background-color: #FC4364 !important;
+    border-color: #FC4364 !important;
+    border-radius: 30px;
+    min-width: 70px !important;
+}
+
+.form-error-icon{
+    color: #DC3644
+}
+/*
+*
+*
+* MENU
+*
+*
+*/
+
+.hamburger_div{
+    position: fixed;
+    top: 1%;
+    right: 2%;
+    z-index: 10;
+    width: 38px;
+    height: 36px;
+    border-radius: 2px;
+}
+.hamburger_div span, .hamburger_div span::before, .hamburger_div span::after {
+    background-color: #2D3E4E;
+    height: 2px;
+    width: 20px;
+    display: block;
+    position: absolute;
+    right: 6px;
+    top: 16px;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+.hamburger_div span::before, .hamburger_div span::after{
+    right: 0;
+    content: '';
+}
+.hamburger_div span::before{
+    width: 22px;
+    top: -7px;
+}
+.hamburger_div span::after{
+    top: 7px;
+    width: 10px;
+}
+
+.bouton_menu.actif{
+    right: 0;
+}
+.bouton_menu.actif .hamburger_div span{
+    background-color: rgba(255,255,255,0);
+}
+.bouton_menu.actif .hamburger_div span::before,
+.bouton_menu.actif .hamburger_div span::after{
+    top:0px;
+    right:-1px;
+    width: 26px;
+    background-color: #FFA101;
+}
+.bouton_menu.actif .hamburger_div span::before{
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.bouton_menu.actif .hamburger_div span::after{
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#menu{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 80%;
+    height: 100vh;
+    /* position: absolute; */
+    right: 0%;
+}
+
+.menu{
+    height: 100vh;
+}
+
+.bouton_hamburger{
+    z-index: 5000;
+}
+
+
+#menu .logo img{
+    width: 130px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contact .phone {
+    width: 150px;
+}
+
+#social-links img{
+    width: 40px;
+}
+/*
+*
+*
+* FOOTER
+*
+*/
+
+
+
+/* 
+*
+* HOME PAGE
+*
+*/
+
+/* Welcome Section */
+#welcome-section{
+    background: url(../images/HomePage.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.logo-header{
+    width: 180px;
+}
+
+.slogan{
+    background: rgba(0, 0, 0, 0.575);
+    /* font-size: 19px; */
+}
+/* Team Section */
+
+#team-section .card-img{
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+}
+#team-section .card-img img{
+    width: 200px;
+}
+
+
+/* 
+*
+* DESTINATION PAGE
+*
+*/
+
+.container-img{
+    width: 200px;
+    height: 260px;
+    overflow: hidden;
+}
+
+
+#description-section .infos{
+    list-style-image: url("../images/icons/icon_puce_liste.png");
+}
+
+
+#info-destination .raisons .circle{
+    border: #FFA101 dashed 2px;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: flex; 
+    justify-content: center;
+}
+#info-destination .raisons .circle p{
+    transform: translateY(25%);
+    font-size: 1.3rem;
+    color: #FFA101;
+}
+.container-raison{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+.container-raison .text-raison{
+    text-align: justify;
+}
+
+/* ** Partie Activités ** */
+
+#activite-section .img{
+    display: flex;
+    max-height: 250px;
+    max-width: 180px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 10px 10px 10px;
+}
+#activite-section .img img{
+    object-fit: cover;
+    position: center;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px 10px 10px;
+}
+#activite-section .content{
+    display: none;
+}
+#activite-section label{
+    margin: 10px 0px ;
+}
+
+
+#activite-section .texte{
+    padding-left: 20px;
+    max-height: 250px;
+    overflow: auto;
+} 
+
+
+#activite-section input:checked ~ .content1{
+    display: block;
+}
+#activite-section input:checked ~ .content2{
+    display: block;
+}
+#activite-section input:checked ~ .content3{
+    display: block;
+}
+#activite-section input:checked ~ .content4{
+    display: block;
+}
+#activite-section input:checked ~ .content5{
+    display: block;
+}
+#activite-section input:checked ~ .content6{
+    display: block;
+}
+
+
+/* 
+*
+* PRODUIT PAGE
+*
+*/
+
+.header_carte_produit{
+    display: none;
+}
+
+.inclusion-exclusion > div {
+    line-height: 20px ;
+}
+
+
+.fc-daygrid-day{
+    padding: 4px !important;
+}
+
+/* 
+*
+* INSCRIPTION PAGE
+*
+*/
+.condition-formulaire li{
+    list-style-type: none;
+}
+
+
+/* 
+*
+* RESERVATION PAGES
+*
+*/
+.card-recap .card-body fieldset > div {
+    display: flex;
+}
+
+.card-recap .card-body fieldset{
+    width: 100%;
+}
+
+
+/* 
+*
+* MON COMPTE
+*
+*/
+
+.header-compte h1{
+    color:#2D3E4E;
+}
+.titre-reservation i{
+    position: absolute;
+    right: 3px;
+    transform: rotate(180deg);
+    border: #FFF 1px solid;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+
+
+/*
+*
+*
+* DEMANDE DE DEVIS
+*
+*
+*/
+#devis legend{
+    /* display: block; */
+}
+
+.card-body > div {
+    /* display: flex; */
+}
+.card-body .form-group > div {
+    display: flex;
+}
+
+#container-form{
+    position: relative;
+    left: 0;
+}
+.panel-devis{
+    width: 100%;
+}
+
+/*
+*
+*
+* ACTIVITES
+*
+*/
+
+.nav-activites a{
+    font-size: 25px;
+    text-decoration: none;
+    color: #FFA101;
+}
+
+.card-activite img{
+    height: 200px;
+}
+
+.img-activite{
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    display: flex;
+}
+.img-activite img{
+    width: 100%;
+    object-fit: cover;
+    position: center;
+}

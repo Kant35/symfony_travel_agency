@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Produit {% endblock %}
+
+{% block body %}
+
+    {# Afficahge des informations de la destination #}
+    <section class="col-md-12 d-flex header_produit mt-md-5 pt-md-5">
+        <div class="col-md-7 py-4 px-4 header_info_produit">
+            <div class="text-center content">
+                <h1 class="pb-3 text-primary">{{ produit.titre }}</h1>
+                <p>{{ produit.description }}</p>
+            </div>
+        </div>
+        <div class="col-md-5 header_carte_produit">
+            {# Récupération de l'image grâce à 'vich_uploader_asset()' qui attend en paramètre un objet entier. Automatiquement il detectera dans quel propriété aller chercher l'image #}
+            <img class="col-md-12 px-3 py-4" src="{{ vich_uploader_asset(produit) }}" alt="">
+        </div>
+    </section>
+
+    {# Affichage des Etapes #}
+    <section class="etape">
+        {% for etape in produit.etapes %}
+            <div class="col-md-12 d-flex flex-md-nowrap flex-wrap px-3 px-md-5 py-3 card_etape">
+                <div class="col-12 col-md-1 me-md-3 jour_etape">
+                    {# Utilisation de la variable 'loop' (qui est disponible dans toutes les boucles twig) pour afficher le jour de l'étape #}
+                    <p class="col-md-10 bg-primary py-md-4 text-center h5 rounded-15">Jour <br> {{loop.index}}</p>
+                </div>
+
+                <div class="col-12 col-md-8 texte_etape">
+                    <p> <strong class="h6 text-decoration-underline"> {{etape.titre}} </strong></p>
+                    <p>{{etape.description}}</p>
+
+                    <div class="col-12 col-md-8 ms-md-4 px-4 bg-secondary text-white rounded-30 info_etape">
+                        <p class="hotel_etape">
+                            {{etape.hotel}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3 px-md-5 photo_etape text-center">
+                    <img class="col-md-12" src="{{ vich_uploader_asset(etape) }}"  alt="">
+                </div>
+            </div>
+            
+        {% endfor %}
+    </section>
+
+    {# Utilisation d'un filtre twig pour afficher un prix (documentation : https://twig.symfony.com/doc/2.x/filters/format_currency.html) #}
+    <h3 class="text-center my-4">{{ produit.prix|format_currency('EUR', {fraction_digit:0}, locale='fr') }} / personne</h3>
+
+    {# Bouton de réservation du produit #}
+    <section class="my-5 d-flex flex-md-row flex-column justify-content-arround align-items-sm-center">
+        {% if app.user %}
+            <a class="btn btn-primary rounded-15 my-3 my-md-0 mx-auto" href="{{ path('app_reservation', {id:produit.id}) }}"> Réserver ce séjour </a>
+        {% else %}
+            <a class="btn btn-primary rounded-15 my-3 my-md-0 mx-auto" href="{{path('app_login')}}"> Connectez-vous pour réserver ce séjour </a>
+        {% endif %}
+    </section>
+
+    {# Affichage des produits similaire en terme de destination #}
+    <section id="produits-section" class="my-5">
+        <h4 class="text-center text-primary">Produits Similaire</h4>
+        <div class="container d-flex flex-wrap justify-content-around">
+            {% for p in produits %}
+                <div class="card col-4 rounded-30 my-3">
+                    <img class="col-12 rounded-30"src="{{ vich_uploader_asset(p)}}" alt="{{ p.titre }}">
+                    <h2 class="text-center "><a class="text-info text-no-underline h5" href="{{ path('app_produit', {id:p.id}) }}">{{ p.titre }}</a></h2>
+                    <p class="duree text-center text-secondary">{{p.etapes|length}} Jours / {{ p.etapes|length - 1 }} Nuits</p>
+                    <p class="description px-3 text-justify">{{ p.description|u.truncate(150, '...', false) }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
