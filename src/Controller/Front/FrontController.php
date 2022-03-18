@@ -134,8 +134,12 @@ class FrontController extends AbstractController
             // A chaque tour de boucle je récupère grâce à la requête findByDestination() (requête que j'ai créé dans ProduitRepository) les produits qui ont la même destination que le produit récupéré grâce à la route.
             // Ces produits que je récupère, je les stocks dans mon tableau $produits[].
             $produits += $produitRepository->findByDestination($destination);
+            foreach ($produitRepository->findByDestination($destination) as $produit) {
+                if(!in_array($produit, $produits)){
+                    $produits[] = $produit;
+                }
+            }
         }
-
         return $this->render("front/produit.html.twig", [
             // Je renvoie à ma vue le produit demandé et les produits qui ont la même destination que le produit demandé.
             'produit' => $produit, 
